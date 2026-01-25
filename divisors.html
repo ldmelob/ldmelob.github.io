@@ -1,0 +1,61 @@
+<html>
+    <head>
+          <style>
+            body {
+                background-color: black;
+                padding: 0px;
+            }
+          </style>
+    </head>
+        <body>
+            <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ldmelob/canvas-matrix@main/CanvasMatrix.js"></script>
+            <script type="text/javascript">
+                const n = (window.innerHeight > window.innerWidth ? window.innerWidth: window.innerHeight) >> 1;
+                const m = n/2;
+                const s = Math.sqrt(n);
+                const q = new CanvasMatrix(n, n);
+                q.canvas.style.marginTop = (window.innerHeight - n) / 2;
+                q.canvas.style.marginLeft = (window.innerWidth / 2) - (n/2);
+                q.canvas.style.borderRadius = m + 'px';
+                document.body.appendChild(q.canvas);
+                
+                var a = 1;
+                var up = true;
+                
+                function d(x, y) {
+                    return ((x - m) * (x - m)) + ((y - m) * (y - m));
+                }
+                
+                function loop() {
+                
+                    if (up) {
+                        if (a < n) { a++; }
+                        else { up = false; a--; }
+                    } else {
+                        if (a > 1) { a--; }
+                        else { up = true; a++; }
+                    }   
+                
+                    for (let x = 0; x < n; x++) {
+                
+                        for (let y = 0; y < n; y++) {
+                        
+                            c = (255 / n) * (d(x, y) % a);
+                            t = 255 - (255 * (d(x, y) / (m * m))); 
+                            q.setp(x, y, c, c, c, t);
+                
+                        }
+                
+                    }
+                    q.render();
+                
+                    requestAnimationFrame(loop);
+                
+                }
+                
+                requestAnimationFrame(loop);
+
+
+            </script>
+    </body>
+</html>
