@@ -37,12 +37,12 @@
                         for (y = 0; y < n; y++) {
                 
                             d = dis(x, y);
-                            if (t > (d * d)) {
+                            if (t > d * 2) {
                                 act = matrix.getp(x, y);
                                 md = t % d;
-                                r = (act[0] + (md % 17)) % 255;
-                                g = (act[1] + (md % 13)) % 255;
-                                b = (act[2] + (md % 7)) % 255;
+                                r = (act[0] + (md % 5)) % 255;
+                                g = (act[1] + (md % 3)) % 255;
+                                b = (act[2] + (md % 2)) % 255;
                                 matrix.setp(x, y, r, g, b, 255)
                             }
                 
