@@ -11,52 +11,45 @@
         <body>
             <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ldmelob/canvas-matrix@main/CanvasMatrix.js"></script>
             <script type="text/javascript">
-                const n = (window.innerHeight > window.innerWidth ? window.innerWidth: window.innerHeight) >> 1;
-                const m = n/2;
-                const s = Math.sqrt(n);
-                const q = new CanvasMatrix(n, n);
-                q.canvas.style.marginTop = (window.innerHeight - n) / 2;
-                q.canvas.style.marginLeft = (window.innerWidth / 2) - (n/2);
-                q.canvas.style.borderRadius = m + 'px';
-                document.body.appendChild(q.canvas);
+                const D = 256;
+                const matrix = new CanvasMatrix(D, D);
+                matrix.canvas.style.marginTop = (window.innerHeight - D) / 2 + 'px';
+                matrix.canvas.style.marginLeft = (window.innerWidth - D) / 2 + 'px';
+                matrix.canvas.style.width = D + 'px';
+                matrix.canvas.style.height = D + 'px';
+                matrix.canvas.style.imageRendering = 'pixelated';
+                matrix.ctx.imageSmoothingEnabled = false;
+                document.body.style.margin = '0px';
+                document.body.style.padding= '0xp';
+                document.body.appendChild(matrix.canvas);
                 
-                var a = 1;
-                var up = true;
-                
-                function d(x, y) {
-                    return ((x - m) * (x - m)) + ((y - m) * (y - m));
-                }
-                
-                function loop() {
-                
-                    if (up) {
-                        if (a < n) { a++; }
-                        else { up = false; a--; }
-                    } else {
-                        if (a > 1) { a--; }
-                        else { up = true; a++; }
-                    }   
-                
-                    for (let x = 0; x < n; x++) {
-                
-                        for (let y = 0; y < n; y++) {
-                        
-                            c = (255 / n) * (d(x, y) % a);
-                            t = 255 - (255 * (d(x, y) / (m * m))); 
-                            q.setp(x, y, c, c, c, t);
-                
+                let t = 0;
+                let v = 1;
+            
+                function draw() {
+            
+                    for (x = 0; x < D; x++) {
+            
+                        for (y = 0; y < D; y++) {
+            
+                            let cor = (t + v * (x * x + y * y)) % 256;
+            
+                            matrix.setp(x, y, 255-cor, Math.abs(cor-127)*2, 255, 255);
+            
                         }
-                
+            
+            
                     }
-                    q.render();
-                
-                    requestAnimationFrame(loop);
-                
+            
+                    matrix.render();
+                    t+=2;
+                    if(t%1000 == 0) {v++;}
+                    requestAnimationFrame(draw);
+            
                 }
+            
+                draw();
                 
-                requestAnimationFrame(loop);
-
-
             </script>
     </body>
 </html>
