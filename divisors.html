@@ -42,13 +42,13 @@
                     }
             
                     matrix.render();
-                    t+=5;
+                    t+=2;
                     if(t%500 == 0) {v++;}
                     requestAnimationFrame(draw);
             
                 }
             
-                draw();
+                requestAnimationFrame(draw);
                 
             </script>
     </body>
