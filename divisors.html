@@ -11,6 +11,8 @@
         <body>
             <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/ldmelob/canvas-matrix@main/CanvasMatrix.js"></script>
             <script type="text/javascript">
+
+                // Setting canvas
                 const D = 512;
                 const matrix = new CanvasMatrix(D, D);
                 matrix.canvas.style.marginTop = (window.innerHeight - D) / 2 + 'px';
@@ -22,7 +24,8 @@
                 document.body.style.margin = '0px';
                 document.body.style.padding= '0xp';
                 document.body.appendChild(matrix.canvas);
-                
+
+                // Main script
                 let t = 0;
                 let v = 27;
             
@@ -42,7 +45,7 @@
                     }
             
                     matrix.render();
-                    t+=2;
+                    t+=1;
                     if(t%500 == 0) {v++;}
                     requestAnimationFrame(draw);
             
