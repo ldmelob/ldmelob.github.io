@@ -24,7 +24,7 @@
                 document.body.appendChild(matrix.canvas);
                 
                 let t = 0;
-                let v = 1;
+                let v = 27;
             
                 function draw() {
             
@@ -42,8 +42,8 @@
                     }
             
                     matrix.render();
-                    t+=2;
-                    if(t%1000 == 0) {v++;}
+                    t+=5;
+                    if(t%500 == 0) {v++;}
                     requestAnimationFrame(draw);
             
                 }
