@@ -34,7 +34,7 @@
             
                             let cor = (t + v * (x * x + y * y)) % 256;
             
-                            matrix.setp(x, y, 255-cor, Math.abs(cor-127)*2, 255, 255);
+                            matrix.setp(x, y, 255-cor, Math.abs(cor-127)*2, cor, 255);
             
                         }
             
